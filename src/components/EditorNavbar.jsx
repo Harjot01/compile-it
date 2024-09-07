@@ -1,18 +1,25 @@
 // EditorNavbar.jsx
 import React, { useContext, useState } from "react";
-import { LANGUAGE_VERSIONS } from "../constants";
 import { executeCode } from "../api";
 import { OutputContext } from "../context/OutputContext";
 
+import LanguageSelector from "./LanguageSelector";
+import ThemeSwitcher from "./ThemeSwitcher";
+import { useLanguage } from "../context/LanguageContext";
+
 const EditorNavbar = ({
-  language,
-  onSelectLanguage,
   editorRef,
   inputValue,
+
 }) => {
-  const { setOutput } = useContext(OutputContext);
+  const { setOutput, setIsError } = useContext(OutputContext);
+  const {language, onSelectLanguage} = useLanguage()
   const [isLoading, setIsLoading] = useState(false);
-  const languages = Object.entries(LANGUAGE_VERSIONS);
+
+  //  Object.entries(monacoThemes).map(([themeId, themeName])=>(
+  //   console.log(themeName, themeId)
+  //  ))
+
   const runCode = async () => {
     const sourceCode = editorRef.current.getValue();
     if (!sourceCode) return;
@@ -25,35 +32,33 @@ const EditorNavbar = ({
         inputValue
       );
       setOutput(result.output.split("\n"));
+      result.stderr ? setIsError(true) : setIsError(false);
     } catch (error) {
     } finally {
       setIsLoading(false);
     }
   };
   return (
-    <div className="flex bg-[#2d2f34] w-[60vw] border border-gray-600 h-12 items-center justify-between">
-      <div className="px-4 py-2 bg-[#1c2130] ">
-        <select
-          className="text-white bg-transparent"
-          name="languages"
-          id="languages"
-          value={language}
-          onChange={(e) => onSelectLanguage(e.target.value)}
-        >
-          {languages.map(([language, version]) => (
-            <option key={language} className="bg-[#2d2f34]" value={language}>
-              {language} ({version})
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="flex gap-3 pr-4">
-        {/* <div className='text-white bg-[#21262d] px-4 py-2'>Change Theme</div> */}
+    <div className="flex  bg-[#2d2f34] w-[60vw] border border-gray-600 h-10 items-center justify-between">
+      {/* <div className="h-full ml-1 flex  items-center w-48 bg-[#1c2130] "> */}
+      <LanguageSelector
+      />
+      {/* </div> */}
+
+      <div className="flex items-center gap-12 pr-4 h-full">
+        {/* Theme Switcher */}
+        <ThemeSwitcher  />
+
         <button
-          className="text-white bg-[#0556f3] px-4 py-2 rounded hover:bg-[#064acb] transition duration-300"
+          className="text-white bg-[#0556f3] h-8 px-6  rounded hover:bg-[#064acb] text-sm"
           onClick={runCode}
+          disabled={isLoading}
         >
-          {isLoading ? "Executing..." : "Run Code"}
+          {isLoading ? (
+            <div className="spinner-border animate-spin inline-block w-4 h-4 border-2 border-t-2 border-t-transparent border-white rounded-full mr-2"></div>
+          ) : (
+            "Run"
+          )}
         </button>
       </div>
     </div>
