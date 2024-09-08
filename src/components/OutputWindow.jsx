@@ -13,7 +13,7 @@ const OutputWindow = () => {
     if (isError) {
       toast.error("An error occurred while executing the code!", {
         position: "top-right",
-        autoClose: 3000, // Duration for the toast to stay visible
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -23,18 +23,22 @@ const OutputWindow = () => {
   }, [isError]);
 
   return (
-    <div className="bg-[#2d2f34] flex-1 w-full max-h-[50vh] border border-gray-600 text-sm">
+    <div className="bg-[#2d2f34] flex-1 w-full h-full border border-gray-600 text-sm">
       <div
-        className="text-white px-2 py-2 w-24 h-10 flex items-center"
-        style={{ backgroundColor: themeColors }}
+        className="px-2 py-2 w-24 h-7 flex items-center border-r border-b border-gray-600"
+        style={{
+          backgroundColor: themeColors.bgColor,
+          color: themeColors.textColor,
+        }}
       >
         outputf.in
       </div>
       <div
-        className={`h-full w-full ${
-          isError ? "text-red-500" : "text-white"
-        } p-3 border-t border-gray-600 overflow-auto`}
-        style={{ backgroundColor: themeColors }}
+        className={`h-full w-full p-3  overflow-auto`}
+        style={{
+          backgroundColor: themeColors.bgColor,
+          color: `${isError ? "red" : themeColors.textColor}`,
+        }}
       >
         {output?.map((line, index) => (
           <p key={index}>{line}</p>

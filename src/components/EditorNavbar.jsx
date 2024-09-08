@@ -1,24 +1,16 @@
 // EditorNavbar.jsx
 import React, { useContext, useState } from "react";
-import { executeCode } from "../api";
+import { executeCode } from "../api/api";
 import { OutputContext } from "../context/OutputContext";
 
 import LanguageSelector from "./LanguageSelector";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useLanguage } from "../context/LanguageContext";
 
-const EditorNavbar = ({
-  editorRef,
-  inputValue,
-
-}) => {
+const EditorNavbar = ({ editorRef, inputValue }) => {
   const { setOutput, setIsError } = useContext(OutputContext);
-  const {language, onSelectLanguage} = useLanguage()
+  const { language } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
-
-  //  Object.entries(monacoThemes).map(([themeId, themeName])=>(
-  //   console.log(themeName, themeId)
-  //  ))
 
   const runCode = async () => {
     const sourceCode = editorRef.current.getValue();
@@ -39,23 +31,20 @@ const EditorNavbar = ({
     }
   };
   return (
-    <div className="flex  bg-[#2d2f34] w-[60vw] border border-gray-600 h-10 items-center justify-between">
-      {/* <div className="h-full ml-1 flex  items-center w-48 bg-[#1c2130] "> */}
-      <LanguageSelector
-      />
-      {/* </div> */}
+    <div className="flex  bg-[#2d2f34]  w-full  h-7  border border-gray-600 items-center justify-between">
+      <LanguageSelector />
 
       <div className="flex items-center gap-12 pr-4 h-full">
         {/* Theme Switcher */}
-        <ThemeSwitcher  />
+        <ThemeSwitcher />
 
         <button
-          className="text-white bg-[#0556f3] h-8 px-6  rounded hover:bg-[#064acb] text-sm"
+          className="text-white bg-[#0556f3] h-5 px-6  rounded hover:bg-[#064acb] text-sm"
           onClick={runCode}
           disabled={isLoading}
         >
           {isLoading ? (
-            <div className="spinner-border animate-spin inline-block w-4 h-4 border-2 border-t-2 border-t-transparent border-white rounded-full mr-2"></div>
+            <div className="spinner-border animate-spin inline-block mt-1 border-2 border-t-2 border-t-transparent border-white rounded-full mr-2"></div>
           ) : (
             "Run"
           )}

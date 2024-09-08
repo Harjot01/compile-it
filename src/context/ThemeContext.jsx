@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
-import defineTheme, { colorMonacoThemes } from "../defineTheme";
+import defineTheme, { monacoThemes } from "../lib/defineTheme";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("cobalt");
-  const themeColors = colorMonacoThemes[theme];
+  const [theme, setTheme] = useState("cobalt2");
+  const themeColors = monacoThemes[theme];
   const handleThemeChange = async (newTheme) => {
     try {
       await defineTheme(newTheme);

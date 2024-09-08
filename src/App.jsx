@@ -1,9 +1,18 @@
-import CodeEditor from "./components/CodeEditor";
+import Landing from "./components/Landing";
+import { LanguageProvider } from "./context/LanguageContext";
+import { OutputProvider } from "./context/OutputContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
     <>
-      <CodeEditor />
+      <OutputProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <Landing />
+          </ThemeProvider>
+        </LanguageProvider>
+      </OutputProvider>
     </>
   );
 }
