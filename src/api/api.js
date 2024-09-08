@@ -6,7 +6,7 @@ const API = axios.create({
 
 export const executeCode = async (language, sourceCode, inputValue) => {
   const response = await API.post("/execute", {
-    language: language.name,
+    language: language.value,
     version: language.version,
     files: [
       {

@@ -18,7 +18,7 @@ const Landing = () => {
   const { theme, themeColors } = useTheme();
 
   useEffect(() => {
-    setSourceCode(CODE_SNIPPETS[language.name] || "");
+    setSourceCode(CODE_SNIPPETS[language.value] || "");
     defineTheme(theme);
   }, [language]);
 
@@ -38,7 +38,7 @@ const Landing = () => {
             <div className="border border-gray-600 flex-grow overflow-hidden">
               <Editor
                 theme={theme}
-                language={language.name}
+                language={language.value}
                 className="h-full"
                 onMount={onMount}
                 value={sourceCode}

@@ -26,7 +26,7 @@ const LanguageSelector = () => {
               className="ml-3 block truncate text-md"
               style={{ color: themeColors.textColor }}
             >
-              {language.name} ({language.version})
+              {language.name}
             </span>
           </span>
           <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -43,12 +43,13 @@ const LanguageSelector = () => {
         >
           {languageOptions.map((langOption) => (
             <ListboxOption
+              key={langOption.name}
               value={langOption}
               className="group relative cursor-pointer select-none py-2 pl-3 pr-9 text-white data-[focus]:bg-[#0556f3] data-[focus]:text-white"
             >
               <div className="flex items-center">
                 <span className="ml-3 block truncate font-normal group-data-[selected]:font-semibold">
-                  {langOption.name} ({langOption.version})
+                  {langOption.name}
                 </span>
               </div>
 
