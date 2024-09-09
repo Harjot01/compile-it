@@ -61,7 +61,7 @@ const Landing = () => {
         </Panel>
 
         <PanelResizeHandle
-          className="w-1 cursor-col-resize"
+          className="w-[2px] cursor-col-resize"
           style={{ backgroundColor: theme.textColor }}
         />
 
@@ -76,7 +76,7 @@ const Landing = () => {
                 />
               </Panel>
               <PanelResizeHandle
-                className="h-1  cursor-row-resize"
+                className="h-[2px]  cursor-row-resize"
                 style={{ backgroundColor: theme.textColor }}
               />
               <Panel default={50}>
