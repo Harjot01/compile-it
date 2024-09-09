@@ -3,7 +3,7 @@ import React from "react";
 import { useTheme } from "../context/ThemeContext";
 
 const InputWindow = ({ inputValue, setInputValue }) => {
-  const { themeColors } = useTheme();
+  const { theme } = useTheme();
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -12,8 +12,8 @@ const InputWindow = ({ inputValue, setInputValue }) => {
       <div
         className="text-white px-4 py-2 w-24 h-7 flex items-center relative border-r border-b border-gray-600"
         style={{
-          backgroundColor: themeColors.bgColor,
-          color: themeColors.textColor,
+          backgroundColor: theme.bgColor,
+          color: theme.textColor,
         }}
       >
         inputf.in
@@ -23,8 +23,8 @@ const InputWindow = ({ inputValue, setInputValue }) => {
           id="code-input"
           className="bg-[#1c2130] w-full h-full p-3 resize-none outline-none "
           style={{
-            backgroundColor: themeColors.bgColor,
-            color: themeColors.textColor,
+            backgroundColor: theme.bgColor,
+            color: theme.textColor,
           }}
           value={inputValue}
           onChange={handleInputChange}

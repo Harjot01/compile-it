@@ -7,7 +7,7 @@ import { useTheme } from "../context/ThemeContext";
 
 const OutputWindow = () => {
   const { output, isError } = useContext(OutputContext);
-  const { themeColors } = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (isError) {
@@ -27,8 +27,8 @@ const OutputWindow = () => {
       <div
         className="px-2 py-2 w-24 h-7 flex items-center border-r border-b border-gray-600"
         style={{
-          backgroundColor: themeColors.bgColor,
-          color: themeColors.textColor,
+          backgroundColor: theme.bgColor,
+          color: theme.textColor,
         }}
       >
         outputf.in
@@ -36,8 +36,8 @@ const OutputWindow = () => {
       <div
         className={`h-full w-full p-3  overflow-auto`}
         style={{
-          backgroundColor: themeColors.bgColor,
-          color: `${isError ? "red" : themeColors.textColor}`,
+          backgroundColor: theme.bgColor,
+          color: `${isError ? "red" : theme.textColor}`,
         }}
       >
         {output?.map((line, index) => (

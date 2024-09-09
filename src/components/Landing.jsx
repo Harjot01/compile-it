@@ -15,16 +15,29 @@ const Landing = () => {
   const [sourceCode, setSourceCode] = useState("");
   const [inputValue, setInputValue] = useState("");
   const { language } = useLanguage();
-  const { theme, themeColors } = useTheme();
+  const { theme, isThemeLoaded } = useTheme();
 
   useEffect(() => {
-    setSourceCode(CODE_SNIPPETS[language.value] || "");
-    defineTheme(theme);
+    const sourceCode = localStorage.getItem("sourceCode");
+    if (sourceCode) {
+      setSourceCode(sourceCode);
+    } else {
+      setSourceCode(CODE_SNIPPETS[language.value] || "");
+    }
+
+    if (isThemeLoaded) {
+      defineTheme(theme);
+    }
   }, [language]);
 
   const onMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
+  };
+
+  const handleSetSourceCode = (sourceCode) => {
+    setSourceCode(sourceCode);
+    localStorage.setItem("sourceCode", sourceCode);
   };
 
   return (
@@ -41,7 +54,7 @@ const Landing = () => {
                 className="h-full"
                 onMount={onMount}
                 value={sourceCode}
-                onChange={(sourceCode) => setSourceCode(sourceCode)}
+                onChange={handleSetSourceCode}
               />
             </div>
           </div>
@@ -49,7 +62,7 @@ const Landing = () => {
 
         <PanelResizeHandle
           className="w-1 cursor-col-resize"
-          style={{ backgroundColor: themeColors.textColor }}
+          style={{ backgroundColor: theme.textColor }}
         />
 
         {/* Right Side - Input/Output */}
@@ -64,7 +77,7 @@ const Landing = () => {
               </Panel>
               <PanelResizeHandle
                 className="h-1  cursor-row-resize"
-                style={{ backgroundColor: themeColors.textColor }}
+                style={{ backgroundColor: theme.textColor }}
               />
               <Panel default={50}>
                 <OutputWindow />

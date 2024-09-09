@@ -12,19 +12,19 @@ import { useTheme } from "../context/ThemeContext";
 
 const LanguageSelector = () => {
   const { language, onSelectLanguage } = useLanguage();
-  const { themeColors } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Listbox value={language} onChange={onSelectLanguage}>
       <div className="relative w-[15rem] ml-1 h-full flex">
         <ListboxButton
           className="text-white relative w-full cursor-pointer rounded-md pl-3 shadow-sm  ring-inset  focus:outline-none  sm:text-sm sm:leading-6"
-          style={{ backgroundColor: themeColors.bgColor }}
+          style={{ backgroundColor: theme.bgColor }}
         >
           <span className="flex items-center">
             <span
               className="ml-3 block truncate text-md"
-              style={{ color: themeColors.textColor }}
+              style={{ color: theme.textColor }}
             >
               {language.name}
             </span>

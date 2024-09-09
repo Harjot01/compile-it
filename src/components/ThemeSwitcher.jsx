@@ -6,8 +6,8 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/20/solid";
-import monacoThemes from "monaco-themes/themes/themelist";
 import { useTheme } from "../context/ThemeContext";
+import { monacoThemes } from "../constants/constants";
 
 const ThemeSwitcher = () => {
   const { theme, handleThemeChange } = useTheme();
@@ -27,15 +27,15 @@ const ThemeSwitcher = () => {
           transition
           className="absolute z-10 mt-8 max-h-56 w-64 overflow-auto rounded-md bg-[#2d2f34] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
         >
-          {Object.entries(monacoThemes).map(([themeId, themeName]) => (
+          {monacoThemes.map((themeOption) => (
             <ListboxOption
-              key={themeId}
-              value={themeId}
+              key={themeOption.name}
+              value={themeOption}
               className="group relative cursor-pointer select-none py-2 pl-3 pr-9 text-white data-[focus]:bg-[#0556f3] data-[focus]:text-white"
             >
               <div className="flex items-center">
                 <span className="ml-3 block truncate font-normal group-data-[selected]:font-semibold">
-                  {themeId}
+                  {themeOption.name}
                 </span>
               </div>
 
