@@ -37,7 +37,6 @@ const Landing = () => {
 
             <div className="border border-gray-600 flex-grow overflow-hidden">
               <Editor
-                theme={theme}
                 language={language.value}
                 className="h-full"
                 onMount={onMount}
